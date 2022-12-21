@@ -31,16 +31,10 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # Runs a set of commands using the runners shell
+      - name: Build docker image
+        run: docker build . --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
       - name: Docker Login
-        uses: actions/docker-login-action@v1
-        with:
-          registry: $DOCKER_REPOSITORY
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Build an push docker image
-        uses: actions/docker-build-push-action@v2
-        with:
-          file: Dockerfile
-          push: true
-          tags: $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+        run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
+      - name: Push docker image
+        run: docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
           
