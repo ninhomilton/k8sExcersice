@@ -18,7 +18,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on self-hosted
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     env:
       DOCKER_REPOSITORY: miltonortegon
       IMAGE_NAME: hello_world
@@ -34,7 +34,12 @@ jobs:
       - name: Build app
         run: mvn install
       - name: Build docker image
-        run: docker build . --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
+        shell: powershell
+        run: |
+          echo ${DOCKER_REPOSITORY}
+          echo ${IMAGE_NAME}
+          echo ${IMAGE_TAG}
+          docker build . --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
       - name: Push docker image
