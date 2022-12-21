@@ -22,9 +22,10 @@ jobs:
     env:
       DOCKER_REPOSITORY: miltonortegon
       IMAGE_NAME: hello_world
-      IMAGE_TAG: ${{ github.run_number }}
+      IMAGE_TAG: miltonortegon/hello_world:${{ github.run_number }}
       CLUSTER_NAME: k8s-cluster
       RESOURCE_GROUP: rg-k8s-cluster
+      TAG: miltonortegon
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -34,7 +35,7 @@ jobs:
       - name: Build app
         run: mvn install
       - name: Build docker image
-        run: docker build . --tag ${DOCKER_REPOSITORY}//${IMAGE_NAME}${IMAGE_TAG}
+        run: docker build . --tag ${IMAGE_TAG}
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
       - name: Push docker image
