@@ -34,7 +34,7 @@ jobs:
       - name: Build app
         run: mvn install
       - name: Build docker image
-        run: docker build . --tag ${DOCKER_REPOSITORY}//${IMAGE_NAME}/:${IMAGE_TAG}
+        run: docker build . --tag ${DOCKER_REPOSITORY}//${IMAGE_NAME}:${IMAGE_TAG}
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
       - name: Push docker image
