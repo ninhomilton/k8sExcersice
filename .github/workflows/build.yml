@@ -27,6 +27,7 @@ jobs:
       RESOURCE_GROUP: rg-k8s-cluster
 
     # Steps represent a sequence of tasks that will be executed as part of the job
+    # docker build . --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
@@ -36,10 +37,9 @@ jobs:
       - name: Build docker image
         shell: powershell
         run: |
-          echo ${DOCKER_REPOSITORY}
+          echo ${env:DOCKER_REPOSITORY}
           echo ${IMAGE_NAME}
           echo ${IMAGE_TAG}
-          docker build . --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$IMAGE_TAG
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
       - name: Push docker image
