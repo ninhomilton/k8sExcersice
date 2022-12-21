@@ -37,9 +37,7 @@ jobs:
       - name: Build docker image
         shell: powershell
         run: |
-          echo ${env:DOCKER_REPOSITORY}
-          echo ${IMAGE_NAME}
-          echo ${IMAGE_TAG}
+          docker build . --tag ${env:DOCKER_REPOSITORY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
       - name: Docker Login
         run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
       - name: Push docker image
