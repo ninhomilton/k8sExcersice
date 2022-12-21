@@ -37,7 +37,7 @@ jobs:
       - name: Build docker image
         run: docker build . --tag miltonortegon/hello_world:17
       - name: Docker Login
-        run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
+        run: echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $(DOCKER_REPOSITORY) --password-stdin
       - name: Push docker image
         run: docker push ${DOCKER_REPOSITORY}/${IMAGE_NAME}:${IMAGE_TAG}
           
