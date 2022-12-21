@@ -41,7 +41,7 @@ jobs:
         run: |
           docker build . --tag ${env:DOCKER_REPOSITORY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
       - name: Docker Login
-        shell: powershell
+        shell: bash
         run: |
           echo ${env:DOCKER_PASSWORD}
           echo ${env:DOCKER_REPOSITORY}
