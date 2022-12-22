@@ -34,14 +34,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
       # Runs a set of commands using the runners shell
-      - name: Build app
-        run: mvn install
-      - name: Build docker image
-        shell: powershell
-        run: |
-          docker build . --tag ${env:DOCKER_REPOSITORY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
+      #- name: Build app
+      #  run: mvn install
+      #- name: Build docker image
+      #  shell: powershell
+      #  run: |
+      #    docker build . --tag ${env:DOCKER_REPOSITORY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
       - name: Docker Login
-        shell: powershell
+        shell: bash
         run:
           cat /github/mypjpp.txt | docker login -u miltonortegon --password-stdin
       #- name: Push docker image
