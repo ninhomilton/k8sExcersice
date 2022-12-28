@@ -21,7 +21,7 @@ jobs:
     runs-on: self-hosted
     env:
       DOCKER_REPOSITORY: localhost:5000
-      IMAGE_NAME: hello_world
+      IMAGE_NAME: hello.world
       IMAGE_TAG: ${{ github.run_number }}
       CLUSTER_NAME: k8s-cluster
       RESOURCE_GROUP: rg-k8s-cluster
