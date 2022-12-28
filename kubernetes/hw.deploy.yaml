@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: localhost:5000/hello.world:{env:IMAGE_TAG}
+          image: localhost:5000/hello.world:version
           ports:
             - containerPort: 8080
