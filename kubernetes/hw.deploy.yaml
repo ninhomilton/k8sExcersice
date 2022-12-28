@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello.world
+spec:
+  selector:
+    matchLabels:
+      app: hello.world
+  replicas: 2 # tells deployment to run 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: hello.world
+        purpose: laboratory
+    spec:
+      containers:
+        - name: nginx
+          image: localhost:5000/hello.world:{env:IMAGE_TAG}
+          ports:
+            - containerPort: 8080
