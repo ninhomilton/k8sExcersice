@@ -49,4 +49,6 @@ jobs:
       - name: change k8s files
         run: sed -i -e 's/{env:IMAGE_TAG}/${env:IMAGE_TAG}/g' kubernetes/hw.deploy.yaml
       - name: deploy image into k8s cluster
-        run: kubectl create -f kubernetes/hw.deploy.yaml
+        run: |
+          kubectl create -f kubernetes/hw.deploy.yaml
+          kubectl create -f kubernetes/hw.service.yaml
