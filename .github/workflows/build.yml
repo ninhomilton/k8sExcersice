@@ -47,8 +47,9 @@ jobs:
       - name: Push docker image
         run: docker push ${env:DOCKER_REPOSITORY}/${env:IMAGE_NAME}:${env:IMAGE_TAG}
       - name: change k8s files
-        run: sed -i -e 's/{env:IMAGE_TAG}/${env:IMAGE_TAG}/g' kubernetes/hw.deploy.yaml
+        run: sed -i -e "s/{env:IMAGE_TAG}/$env:IMAGE_TAG/g" kubernetes/hw.deploy.yaml
       - name: view file contents
+        shell: bash
         run: more kubernetes/hw.deploy.yaml
       - name: deploy image into k8s cluster
         run: |
