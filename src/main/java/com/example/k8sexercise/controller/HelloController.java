@@ -14,6 +14,8 @@ public class HelloController {
             result = "Hola mundo!!!";
         }else if (language.equalsIgnoreCase("french")){
             result = "Salut monde!!!";
+        }else if (language.equalsIgnoreCase("italian")){
+            result = "Ciao mondo!!!";
         }
         return result;
     }
